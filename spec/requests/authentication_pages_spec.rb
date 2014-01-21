@@ -7,6 +7,15 @@ describe "Authentication" do
   describe "signin" do
     before { visit signin_path }
 
+    describe "not signed in" do
+      let(:user) { FactoryGirl.create(:user) }
+      it { should_not have_link('Users',       href: users_path) }
+      it { should_not have_link('Profile',      href: user_path(user)) }
+      it { should_not have_link('Settings',    href: edit_user_path(user)) }
+      it { should_not have_link('Sign out',    href: signout_path) }
+      it { should have_link('Sign in', href: signin_path) }
+    end
+
     describe "with valid information" do
       let(:user) { FactoryGirl.create(:user) }
       before { valid_signin(user) }
@@ -17,6 +26,11 @@ describe "Authentication" do
       it { should have_link('Settings',    href: edit_user_path(user)) }
       it { should have_link('Sign out',    href: signout_path) }
       it { should_not have_link('Sign in', href: signin_path) }
+
+      describe "try to access new" do
+        before { visit signup_path }
+          it { should_not have_title('Sign up') }
+      end
 
       describe "followed by signout" do
         before { click_link "Sign out" }
@@ -45,9 +59,10 @@ describe "Authentication" do
       describe "when attempting to visit a protected page" do
         before do
           visit edit_user_path(user)
-          fill_in "Email",    with: user.email
-          fill_in "Password", with: user.password
-          click_button "Sign in"
+          sign_in user
+          #fill_in "Email",    with: user.email
+          #fill_in "Password", with: user.password
+          #click_button "Sign in"
         end
 
         describe "after signing in" do
