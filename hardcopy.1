@@ -1,0 +1,48 @@
+      sessions_controller.rb   |  1 <% if signed_in? %>
+      static_pages_controller.>|  2   <div class="row">
+      users_controller.rb      |  3     <aside class="span4">
+  ¸ helpers/                   |  4       <section>
+  ¸ mailers/                   |  5       <%= render 'shared/user_info' %>
+  ¸ models/                    |  6       </section>
+  ¾ views/                     |  7       <section>
+    ¸ layouts/                 |  8       <%= render 'shared/micropost_form' %>
+    ¸ microposts/              |  9       </section>
+    ¸ sessions/                | 10       </aside>
+    ¾ shared/                  | 11       <div class="span8">
+        _error_messages.html.e>| 12         <h3>Micropost Feed</h3>
+        _feed.html.erb         | 13         <%= render 'shared/feed' %>
+        _feed_item.html.erb    | 14       </div>
+        _micropost_form.html.e>| 15     </div>
+        _user_info.html.erb    | 16   <% else %>
+    ¾ static_pages/            | 17   <div class="center hero-unit">
+        about.html.erb         | 18     <h1>Welcome to the Sample App</h1>
+        contact.html.erb       | 19
+        help.html.erb          | 20     <h2>
+        home.html.erb          | 21       This is the home page for the
+    ¸ users/                   | 22       <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
+¸ bin/                         |app/views/static_pages/home.html.erb  Line:13/30[43%]Col:1Buf:#4[32][0x20]
+¸ config/                      | 16     let(:heading)    { 'Sample App' }
+¸ db/                          | 17     let(:page_title) { '' }
+¸ features/                    | 18
+¸ lib/                         | 19     it_should_behave_like "all static pages"
+¸ log/                         | 20     it { should_not have_title(' | Home') }
+¸ public/                      | 21
+¸ script/                      | 22     describe "for signed-in users" do
+¾ spec/                        | 23       let(:user) { FactoryGirl.create(:user) }
+  ¸ controllers/               | 24       before do
+  ¸ helpers/                   | 25         FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+  ¸ models/                    | 26         FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+  ¾ requests/                  | 27         sign_in user
+      authentication_pages_spe>| 28         visit root_path
+      micropost_pages_spec.rb  | 29       end
+      static_pages_spec.rb     | 30
+      user_pages_spec.rb       | 31       it "should render the user's feed" do
+  ¸ support/                   | 32         user.feed.each do |item|
+    factories.rb               | 33           expect(page).to have_selector("li##{item.id}", text: item.content)
+    spec_helper.rb             | 34         end
+¸ tmp/                         | 35       end
+¸ vendor/                      | 36     end
+  config.ru                    | 37   end
+  Gemfile                      | 38
+<eric/rails_projects/sample_app spec/requests/static_pages_spec.rb  Line:38/75[50%]Col:1Buf:#18[0][0x0]
+"app/views/static_pages/home.html.erb" 30L, 769C

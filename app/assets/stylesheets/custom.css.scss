@@ -109,6 +109,10 @@ footer {
 
 /* sidebar */
 aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
   section {
     padding: 10px 0;
     border-top: 1px solid $grayLighter;
@@ -176,6 +180,20 @@ input {
   }
 }
 
+/* Microposts */
+.microposts {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+
+.content {
+  display: block;
+}
 
 /* miscellaneous */
 
