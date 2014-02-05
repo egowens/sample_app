@@ -31,6 +31,24 @@ describe "MicropostPages" do
     end
   end
 
+  describe "micropost status" do
+    before do
+      FactoryGirl.create(:micropost, user: user)
+      visit root_path
+    end
+
+    it "should have the right micropost number" do
+      expect(page).to have_content(Micropost.count)
+    end
+    it "should pluralize microposts correctly" do
+      if Micropost.count ==1
+        expect(page).to have_content("micropost")
+      elsif Micropost.count > 1
+        expect(page).to have_content("microposts")
+      end
+    end
+  end
+
   describe "micropost destruction" do
     before { FactoryGirl.create(:micropost, user: user) }
 
